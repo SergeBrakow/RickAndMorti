@@ -19,24 +19,26 @@ main {
   li {
     list-style: none;
   }
-  input {
+  .searchForName {
     border-radius: 5px;
     height: 20px;
     width: 90px;
   }
-  .charakter {
+  .charakterImage {
     border-radius: 10px;
-    height: 180px;
+    border-color: gray;
+    border-style: solid;
+    height: 360px;
   }
-  .charakterName {
+  figcaption {
     font-size: 15px;
     text-align: center;
-    color: darkblue;
+    color: black;
     padding-bottom: 10px;
   }
-  .card {
+  figure {
     border-radius: 8px;
     padding: 5px 10px;
     background-color: lightgray;
-    cursor: default;
+    cursor: pointer;
   }

@@ -4,16 +4,11 @@ const searchForName = document.querySelector('[data-js="searchForName"]');
 const searchButton = document.querySelector('[data-js="searchButton"]');
 const statusFilter = document.querySelector('[data-js="statusFilter"]');
 
-
+console.log("test");
 searchButton.addEventListener('click', event => {   
     event.preventDefault();
-    // console.log(searchForName.value);
-    // console.log(statusFilter.value);
-    // console.log(createWebLink(searchForName.value, statusFilter.value));
-    // console.log("test" + getJsonData(createWebLink(searchForName.value, statusFilter.value)));
-
-    const nameArray = getJsonData(createWebLink(searchForName.value, statusFilter.value));
-    createCards(nameArray);
+    const webLink = createWebLink(searchForName.value, statusFilter.value);
+    getJsonData(webLink);
 });
 
 function createWebLink(searchName, status){
@@ -30,28 +25,31 @@ function createWebLink(searchName, status){
 async function getJsonData(Link) {
     try {
     const response = await fetch(Link);
-    const data = await response.json();
-    return(data.results);
+    const data = await response.json();  
+    createCards(data.results);
     } catch(error) {
         console.error("Error in getJsonData : " + error.message);
     }
 }
 
+let counter =0;
 function createCards(nameList){
-    nameList.forEach((element) => {
+    console.log(nameList);
+    nameList.forEach(name => {
+        console.log(counter);
         const charakterList = document.createElement("li");
     
-        const card = document.createElement("card");
+        const card = document.createElement("figure");
     
-        const charakterName = document.createElement("charakterName");
-        charakterName.textContent = element.name;
+        const charakterName = document.createElement("figcaption");
+        charakterName.textContent = name.name;
         card.append(charakterName);
     
-        const image = document.createElement("img");
-        image.setAttribute("src", element.image);
+        const image = document.createElement("charakterImage");
+        image.setAttribute("src", name.image);
         card.append(image);
     
         charakterList.append(card);
         main.append(charakterList);
-      });
+    });
 }
